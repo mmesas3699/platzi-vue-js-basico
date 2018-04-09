@@ -1,0 +1,113 @@
+INTRODUCCION AL CURSO
+	
+	# Características:
+		
+		* Framework progresivo: Se puede ir incrementando la complejidad de la aplicación a medida que se 
+			requiera.
+
+		* MV*: Es una tecnologia de modelos y vistas sin importar el controlador que se use. Funciona 
+			con vistas que estan atadas a los modelos.
+
+		* Reactivo: Al cambiar el estado de los modelos las vistas se van a actualizar automaticamente
+
+		* Vue.js core: El core de vue.js es para las interfaces de usuario (UI). Para el manejo de rutas el
+			server side render existen otras librerias que se pueden usar junta a esta.
+
+		* Componentes: Esta orientada a componenetes reutilizables.
+
+		* Fácil de aprender: En especial para diseñadores. En vue se especifica que se quiere que suceda 
+			y por ejemplo en contra partida en react se especifica como se quiere que suceda.
+
+		* Vue.js + herramientas + librerías = SPA (single page aplication): 
+
+
+	# Cambio de estado: Cada vez que cambia el estado vue.js hace los bindings* y se actualiza las vistas. Esto
+		con los inputs de los usuarios. Por ejemplo un clic o enviar un formulario, esto cambia los estados y 
+		por ende se va a cambiar el render de la vista.
+
+				User Input
+		   ______________________
+		  |	                     |	
+		  |	                     v	
+		View  <--------------   State
+				   render
+
+	** binding ('atar' un componente o algun elemente por ejemplo un modelo a una vista)
+
+	
+	# Vue.js es mas optimo a nivel de performance que Angular o React.
+
+	
+	# Vs React:
+
+		* Similitudes:
+			- Virtual DOM: Es un segundo DOM en el cual suceden los cambio primero y despues se comparan con el 	DOM principal y va realizando los cambios conforme van sucediendo.
+
+			- Componentes: Las 2 permiten creat componentes.
+
+			- Librerias core sólo para la UI.
+
+		Performance:
+			- Vue.js minimiza las interacciones con el DOM.
+			- Minimizar los cálculos de JS para saber qué se va a modificar.
+
+		Update performance:
+			- Vue.js tiene dependencias auto-trackeadas: Vue.js sabe todo el tiempo que si se modifica un objeto
+				se debe modificar tambien los componentes que contienen dicho objeto.
+
+		Developer experience: Aprender React es más complicado.
+
+		HTML: 
+			- En React el html se escribe en el metodo render(), lo que se escriba dentro de este metodo es lo
+				que se va renderizar en el html.
+
+			- En Vue se usan 'templates' que son etiquetas html y dentro de estas se progama lo que se quiere 
+				que aparezca. Es mucho más sencillo que el metodo render().
+
+		CSS: 
+			- Los estilos en React se declaran en JS como un JSON.
+
+			- Y para Vue se puede usar, como siempre, <style> o un archivo .css tradicional. En React solo se
+				se puede como dice arriba.
+
+
+
+
+	# Vs Angular:
+
+		* Las dos usan TypeScript.
+		
+		* Performance y tamaño: Vue es mas rapido que Angular y pesa la mitad.
+		
+		* Flexibilidad: Angular es un framework y al usarlo es muy complicado salir de su ecosistema, Vue es 
+			una libreria mucho más liviana.
+
+		* Curva de aprendizaje: Para aprender Vue basta HTML, CSS, JS, pero para Angular se tiene que
+			manejar muchos conceptos: Servicios, Typescript ...
+
+
+HOLA MUNDO CON VUE.JS
+	
+	* Colocar el script de CDN al final del body:
+
+		<!-- Crear un objeto Vue() -->	
+		<script type="text/javascript" charset="utf-8">
+		  let app = new Vue({
+			el: '#app', // el = Elemento a seleccionar se puede con selectores de CSS.
+			data: {
+				nombre: 'Miguel'
+			}
+		  })
+		</script>
+
+	* Como es Vue es una libreria reactiva puedo entrar a la consola del navegador y desde alli modificar el
+		valor de la variable app:
+
+		> app.nombre
+		  "Miguel"
+		> app.nombre = "Mundo"
+
+	* No es posible colocar {{}} dentro de los atributo de los elementos del DOM. Hay que utilizar v-bind:
+
+		No: <a href="{{ url }}" >Link</a>
+		Si: <a v-bind:href="url (nombre variable)" >Link</a>
