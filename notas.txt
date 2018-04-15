@@ -111,3 +111,83 @@ HOLA MUNDO CON VUE.JS
 
 		No: <a href="{{ url }}" >Link</a>
 		Si: <a v-bind:href="url (nombre variable)" >Link</a>
+
+
+MANEJO DE CONDICIONES CON VUE.JS
+
+	Tengo un elemento <a> el cual tiene un atributo 'v-if' cuyo valor debe el nombre de una variable que se
+	encuentre en el 'data' de mi objeto VUE, si el valor de esta variable es 'true' entonces se mostrara el elemento <a>, si el 'false' no se mostrara:
+
+		<a v-if='mostrar'> un link </a>
+
+	Y en mi script:
+
+		<script type="text/javascript" charset="utf-8">
+		  let app = new Vue({
+			el: '#app', // el = Elemento a seleccionar se puede con selectores de CSS.
+			data: {
+				nombre: 'Miguel',
+				mostrar: true,
+			}
+		  })
+		</script>
+
+	** Si quiero asignar el mismo comportamiento a distintas etiquetas de HTML tengo las siguientes opciones:
+		1. Colocar el v-if dentro de cada etiqueta.
+		2. O bien puedo agrupar las diferentes etiquetas dentro de un <div> y a este colocarle el atributo v-if.
+		3. Pero lo mas recomendable es usar la etiqueta '<template>':
+
+			<template v-if="mostrar">
+				<h1>Mi titulo</h1>
+				<h2>Mi subtitulo</h2>
+				<a :href="url" target="_blank">Ir a {{ pagina }}</a>
+			</template>
+
+			* Los Template no son elementos HTML, por lo tanto no son archivos que el navegador pueda
+			  interpretar (al inspeccionar el codigo el navegador no lo muestra).
+			* No se puede poner un atributo de CSS a un elemento que el navegador no entiende.
+			* Template es un englobador de objetos que Vue.js puede interpretar.
+
+	
+	** Tambien se puede usar v-show que lo que hace es colocar display:none al elemento que vaya a ocultar, a
+		diferencia de v-if que no incluye en el DOM la etiqueta usada.
+
+			<div v-show="mostrar">
+				v-show='mostrar', se muestra si mostrar es true
+			</div>
+			<div v-show="!mostrar">
+				v-show="!mostrar", se muestra si mostrar es false 			
+			</div>
+
+		** v-show no se puede usar con <template> por que template no es una etiqueta valida de HTML.
+
+	// 
+		Se recomienda usar v-show cuando los elementos de muestran u ocultan dependiendo de la interacción del 
+		usuario, por ejemplo con un botón, ya que al navegador le cuesta menos cambiar el atributo CSS, para
+		otros casos se recomienda v-if.
+	//
+
+
+FILTRO DE DATOS EN VUE.JS
+	
+	Los filtros siven para que un elemento pase por un filtro antes de mostrarse en pantalla, por ejemplo que
+	se muestre todo en mayuscula o todo en minuscula.
+
+	Para aplicar filtros de usar | 'pipe' dentro del {{ }} = {{ variable | filtro }}
+
+	** Crear filtros: En la construccion del objeto vue:
+
+		let app = new Vue({
+			el: '#app',
+			data: {
+				...
+			},
+    ----->	filters: {
+				* Aca van los filtros *
+			}
+		  })
+
+	** Es posible concatenar varios filtros que se iran aplicando en el orden en que se declaran:
+		{{ variable | filtro1 | filtro2 | ... }}
+
+

@@ -8,8 +8,18 @@
 </head>
 <body>
 	<div id="app">
-		Hola {{ nombre }}
-		<a href="https://google.com" target="_blank">Ir a {{ pagina }}</a>
+		<template v-if="mostrar">
+			<h1>{{ titulo | uppercase }}</h1>
+			<h2>{{ subtitulo | lowercase }}</h2>
+			<h3>{{ subtitulo2 | capitalize }}</h3>
+			<a :href="url" target="_blank">Ir a {{ pagina }}</a>
+		</template>
+		<div v-show="mostrar">
+			v-show='mostrar', se muestra si mostrar es true
+		</div>
+		<div v-show="!mostrar">
+			v-show="!mostrar", se muestra si mostrar es false 			
+		</div>
 	</div>
 	
 	<!-- Vue.js -->
@@ -20,9 +30,23 @@
 		let app = new Vue({
 			el: '#app',
 			data: {
-				nombre: 'Miguel',
+				titulo: "Estás en platzi",
+				subtitulo: "Estás viendo el curso de vue.js",
+				subtitulo2: "va a pasar este texto a capitalize",
 				url: 'https://google.com',
-				pagina: 'Google'
+				pagina: 'Google',
+				mostrar: true,
+			},
+			filters: {
+				uppercase: function (str) {
+					return str.toUpperCase();
+				},
+				lowercase: function (str) {
+					return str.toLowerCase();
+				},
+				capitalize: function (str) {
+					return str.charAt(0).toUpperCase() + str.slice(1);
+				}
 			}
 		})
 	</script>
